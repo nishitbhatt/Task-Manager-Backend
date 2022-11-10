@@ -15,7 +15,9 @@ const connection = mysql.createConnection({
 });
 
 try {
-    connection.connect()
+    connection.connect(() => {
+        console.log('hERE')
+    })
 } catch (error) {
     console.log('Can not connect to database', error)
 }

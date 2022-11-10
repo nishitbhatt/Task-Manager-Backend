@@ -36,8 +36,8 @@ app.use(function (req, res, next) {
 
 // Tasks Routes
 app.use('/api/user', userRoutes);
-// app.use('/api/section', jsonParser, sectionRoutes);
-// app.use('/api/tasks', jsonParser, tasksRoutes);
+app.use('/api/section', jsonParser, sectionRoutes);
+app.use('/api/tasks', jsonParser, tasksRoutes);
 
 
 app.listen(PORT, () => {
