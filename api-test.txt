@@ -1,0 +1,7 @@
+POST http://192.168.1.78:3002/api/user/authenticate
+content-type: application/json
+
+{
+    "password": "Nishit@Gmail@123",
+    "username": "nishit@gmail.com"
+}
