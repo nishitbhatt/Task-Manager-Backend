@@ -5,7 +5,7 @@ const db_connect = () => {
     // Connecting to the database
     const { MEDIUM, MONGO_URI, LIVE_MONGO_URI } = process.env;
 
-    let DB_MONGO_URL = (MEDIUM == 'PROD') ? LIVE_MONGO_URI : MONGO_URI
+    let DB_MONGO_URL = 'mongodb+srv://TaskManager:Paparocks_123@cluster0.3rcip.mongodb.net/zentodo'
 
     mongoose
         .connect(DB_MONGO_URL)
