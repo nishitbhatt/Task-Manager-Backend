@@ -1,20 +1,24 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+
 dotenv.config()
 import db_connect from './config/database.js'
-db_connect()
-import bodyParser from 'body-parser'
 import auth from './middleware/auth.js'
+db_connect()
+
 
 
 
 // Import Routes
-// import userRoutes from './routes/user.js';
-import SectionRoutes from './routes/sections.js';
-import TasksRoutes from './routes/tasks.js';
+import { default as UserRoutes } from './routes/user.js';
+import { default as TasksRoutes } from './routes/tasks.js';
+import { default as SectionRoutes } from './routes/sections.js';
 
 const app = express();
 
+app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -28,9 +32,11 @@ app.use(function (req, res, next) {
 });
 
 
-// app.use('/api/')
-// app.use('/api/user', userRoutes);
+// User Routes
+app.use('/api/user', UserRoutes);
+// Task Routes
+app.use('/api/task', auth, TasksRoutes);
+// Section Routes
 app.use('/api/section', SectionRoutes);
-app.use('/api/tasks', TasksRoutes);
 
 export default app

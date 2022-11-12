@@ -4,6 +4,7 @@ import TasksModel from "../models/Tasks.model.js";
 export const getAllTasks = async (req, res) => {
     try {
         let status, data;
+        console.log({users: req.user})
         const allTodos = await TasksModel.find();
         if (allTodos) {
             status = 200;

@@ -1,0 +1,32 @@
+GET http://192.168.1.78:4001/api/task
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM2ZTI5ODdhZTllN2UzNjBkZjFmZmVjIiwiZW1haWwiOiJuaXNoaXRAZ21haWwuY29tIiwiaWF0IjoxNjY4MjMyNTkwLCJleHAiOjE2NjgyMzk3OTB9.Bs551Ple8w4eUrPVK3NPzEz_KdegFau3R-izlThiUTE
+
+
+###
+
+
+POST http://192.168.1.78:4001/api/user/register
+content-type: application/json
+
+{
+    "first_name": "Nishit",
+    "last_name": "Bhatt",
+    "email": "nishit@gmail.com",
+    "password": "Nishit@gmail@123",
+    "contact_no": "9429214933"
+}
+
+
+
+###
+
+
+
+POST http://192.168.1.78:4001/api/user/login
+content-type: application/json
+
+{
+    "email": "nishit@gmail.com",
+    "password": "Nishit@gmail@123"
+}

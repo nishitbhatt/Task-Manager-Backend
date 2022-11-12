@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
     password: { type: String },
     contact_no: { type: String },
     token: { type: String },
-    isactive: { type: Number }
+    is_active: { type: Number }
 });
 
-const UserModel = mongoose.model('user', userSchema)
+const UserModel = mongoose.model('users', userSchema)
 export default UserModel
