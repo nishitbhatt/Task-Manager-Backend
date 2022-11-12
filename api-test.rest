@@ -2,6 +2,12 @@ GET http://192.168.1.78:4001/api/task
 content-type: application/json
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM2ZTI5ODdhZTllN2UzNjBkZjFmZmVjIiwiZW1haWwiOiJuaXNoaXRAZ21haWwuY29tIiwiaWF0IjoxNjY4MjMyNTkwLCJleHAiOjE2NjgyMzk3OTB9.Bs551Ple8w4eUrPVK3NPzEz_KdegFau3R-izlThiUTE
 
+###
+
+GET https://task-manager-backend-blue.vercel.app/api/task
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM2Zjc1NGYwOGZiMTVhMTRiZWZmNzFjIiwiZW1haWwiOiJuaXNoaXRAZ21haWwuY29tIiwiaWF0IjoxNjY4MjU0NjEyLCJleHAiOjE2NjgyNjE4MTJ9.t888_GceLZ1uLGcSldjwManIrHG7xZkNXuc7gt-lGGw
+
 
 ###
 
@@ -24,6 +30,17 @@ content-type: application/json
 
 
 POST http://192.168.1.78:4001/api/user/login
+content-type: application/json
+
+{
+    "email": "nishit@gmail.com",
+    "password": "Nishit@gmail@123"
+}
+
+
+###
+
+POST https://task-manager-backend-blue.vercel.app/api/user/login
 content-type: application/json
 
 {

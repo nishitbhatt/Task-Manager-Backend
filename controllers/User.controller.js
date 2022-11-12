@@ -94,10 +94,10 @@ export const login = async (req, res) => {
             const cookieOptions = {
                 path: "/",
                 sameSite: true,
-                maxAge: 1000 * 60 * 60 * 2, // would expire after 2 hours
+                maxAge: 1000 * 60 * 60 * 20, // would expire after 2 hours
                 httpOnly: true, // The cookie only accessible by the web server
             }
-            res.cookie('x-access-token', userToken, cookieOptions)
+            res.cookie('x-access-token', userToken)
             return res.status(200).json({status: 200, user});
         }
 
