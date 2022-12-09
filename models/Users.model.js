@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
     contact_no: { type: String },
     token: { type: String },
     is_active: { type: Number }
+}, {
+    timestamps: true, versionKey: false
 });
 
 const UserModel = mongoose.model('users', userSchema)

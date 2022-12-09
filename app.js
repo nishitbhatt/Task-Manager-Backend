@@ -12,9 +12,8 @@ db_connect()
 
 
 // Import Routes
-import { default as UserRoutes } from './routes/user.js';
-import { default as TasksRoutes } from './routes/tasks.js';
-import { default as SectionRoutes } from './routes/sections.js';
+import { default as UserRoutes } from './routes/users.js';
+import { default as UserTasksRoutes } from './routes/user-tasks.js';
 
 const app = express();
 
@@ -31,12 +30,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 // User Routes
 app.use('/api/user', UserRoutes);
 // Task Routes
-app.use('/api/task', auth, TasksRoutes);
-// Section Routes
-app.use('/api/section', SectionRoutes);
+app.use('/api/user-task', auth, UserTasksRoutes);
 
 export default app

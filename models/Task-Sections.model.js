@@ -2,9 +2,9 @@ import mongoose from 'mongoose'
 
 const SectionsSchema = new mongoose.Schema({
     name: String
-});
+}, { timestamps: true, versionKey: false });
 
 
-const SectionModel = new mongoose.model('sections', SectionsSchema);
+const SectionModel = mongoose.model('sections', SectionsSchema);
 
 export default SectionModel

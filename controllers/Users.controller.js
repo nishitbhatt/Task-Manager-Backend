@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
-import UserModel from '../models/User.model.js'
 import jwt from 'jsonwebtoken'
+import { UserModel } from "../models/index.js";
 import { createUniqueSlug } from '../utils/unique-slug.js'
 
 
@@ -97,8 +97,8 @@ export const login = async (req, res) => {
                 maxAge: 1000 * 60 * 60 * 20, // would expire after 2 hours
                 httpOnly: true, // The cookie only accessible by the web server
             }
-            res.cookie('x-access-token', userToken)
-            return res.status(200).json({status: 200, user});
+            res.cookie('x-access-token', userToken, cookieOptions)
+            return res.status(200).json({ status: 200, user });
         }
 
         status = 400
@@ -106,8 +106,8 @@ export const login = async (req, res) => {
         return res.status(400).json({ status, message });
     } catch (err) {
         console.log(err)
-        status = 400
+        status = 500
         message = `Error Occured!`
-        return res.status(400).json({ status, message });
+        return res.status(status).json({ status, message });
     }
 }
