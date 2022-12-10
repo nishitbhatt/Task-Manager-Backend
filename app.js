@@ -18,7 +18,7 @@ import { default as UserTasksRoutes } from './routes/user-tasks.js';
 
 const app = express();
 
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
