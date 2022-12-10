@@ -21,7 +21,7 @@ const app = express();
 
 app.use(cors({
     credentials: true,
-    origin: true
+    origin: 'http://192.168.1.78:3000'
 }));
 app.use(cookieParser())
 app.use(express.json())
