@@ -28,8 +28,25 @@ content-type: application/json
 ###
 
 
+POST https://task-manager-backend-blue.vercel.app/api/user/register
+content-type: application/json
 
-POST http://192.168.1.78:4001/api/user/login
+{
+    "first_name": "Nishit",
+    "last_name": "Bhatt",
+    "email": "nishit@gmail.com",
+    "password": "Nishit@gmail@123",
+    "contact_no": "9429214933"
+}
+
+
+
+###
+
+
+
+# POST http://192.168.1.78:4001/api/user/login
+POST https://task-manager-backend-blue.vercel.app/api/user/login
 content-type: application/json
 
 {
