@@ -23,17 +23,8 @@ const whitelist = [
 ]
 
 app.use(cors({
-    credentials: true, 
-    origin: (origin, callback) => {
-
-        // `!origin` allows server-to-server requests (ie, localhost requests)
-        if (!origin || whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error("Not allowed by CORS: " + origin))
-        }
-    },
-    optionsSuccessStatus: 200
+    credentials: true,
+    origin: true
 }));
 app.use(cookieParser())
 app.use(express.json())
@@ -41,14 +32,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-// app.use(function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
-//     res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-//     res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS, DELETE');
-//     res.setHeader('Access-Control-Allow-Credentials', 'true');
-//     console.log('HEREEEE')
-//     next();
-// });
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS, DELETE');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    console.log('HEREEEE')
+    next();
+});
 
 // User Routes
 app.use('/api/user', UserRoutes);
