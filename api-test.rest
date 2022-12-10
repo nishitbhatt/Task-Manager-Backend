@@ -46,7 +46,7 @@ content-type: application/json
 
 
 # POST http://192.168.1.78:4001/api/user/login
-POST https://task-manager-backend-blue.vercel.app/api/user/login
+POST https://zentodo-app-backend.vercel.app/api/user/login
 content-type: application/json
 
 {
