@@ -18,7 +18,23 @@ import { default as UserTasksRoutes } from './routes/user-tasks.js';
 
 const app = express();
 
-app.use(cors({ credentials: true, origin: true }));
+const whitelist = [
+    'http://192.168.1.78:3000/login', // not https
+]
+
+app.use(cors({
+    credentials: true, 
+    origin: (origin, callback) => {
+
+        // `!origin` allows server-to-server requests (ie, localhost requests)
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error("Not allowed by CORS: " + origin))
+        }
+    },
+    optionsSuccessStatus: 200
+}));
 app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
