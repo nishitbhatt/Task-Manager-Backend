@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
     res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS, DELETE');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-    
+    console.log('HEREEEE')
     next();
 });
 
