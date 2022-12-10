@@ -18,6 +18,7 @@ import { default as UserTasksRoutes } from './routes/user-tasks.js';
 
 const app = express();
 
+app.use(cors());
 app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +33,6 @@ app.use(function (req, res, next) {
     console.log('HEREEEE')
     next();
 });
-app.use(cors({ origin: '*' }));
 
 // User Routes
 app.use('/api/user', UserRoutes);
