@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
+import cors from "cors";
 
 dotenv.config()
 import db_connect from './config/database.js'
@@ -31,6 +32,7 @@ app.use(function (req, res, next) {
     console.log('HEREEEE')
     next();
 });
+app.use(cors({ origin: '*' }));
 
 // User Routes
 app.use('/api/user', UserRoutes);
