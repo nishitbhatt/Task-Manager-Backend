@@ -93,7 +93,8 @@ export const login = async (req, res) => {
             // set user
             const cookieOptions = {
                 path: "/",
-                sameSite: 'none',
+                secure: false,
+                sameSite: "lax",
                 maxAge: 1000 * 60 * 60 * 20, // would expire after 2 hours
                 httpOnly: true, // The cookie only accessible by the web server
             }
