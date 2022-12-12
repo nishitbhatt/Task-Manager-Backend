@@ -18,11 +18,25 @@ import { default as UserTasksRoutes } from './routes/user-tasks.js';
 
 const app = express();
 
+const allowedOrigins = [
+    'capacitor://localhost',
+    'ionic://localhost',
+    'http://localhost',
+    'http://localhost:8080',
+    'http://localhost:8100',
+];
 
-app.use(cors({
-    credentials: true,
-    origin: 'http://192.168.1.78:3000'
-}));
+// Reflect the origin if it's in the allowed list or not defined (cURL, Postman, etc.)
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Origin not allowed by CORS'));
+        }
+    },
+};
+app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
