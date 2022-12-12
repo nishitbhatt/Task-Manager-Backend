@@ -93,12 +93,11 @@ export const login = async (req, res) => {
             // set user
             const cookieOptions = {
                 path: "/",
-                secure: false,
-                sameSite: "lax",
+                sameSite: "none",
                 maxAge: 1000 * 60 * 60 * 20, // would expire after 2 hours
                 httpOnly: true, // The cookie only accessible by the web server
             }
-            res.cookie('x-access-token', userToken)
+            res.cookie('x-access-token', userToken, cookieOptions)
             return res.status(200).json({ status: 200, user });
         }
 
