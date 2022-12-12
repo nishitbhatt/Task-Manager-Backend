@@ -37,7 +37,8 @@ const corsOptions = {
         }
     },
 };
-app.use(cors({ credentials: true, origin: false }));
+app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,7 +55,7 @@ app.use(bodyParser.json());
 // });
 
 // User Routes
-app.use('/api/user', UserRoutes);
+app.use('/api/user', cors(corsOptions), UserRoutes);
 // Task Routes
 app.use('/api/user-task', auth, UserTasksRoutes);
 
