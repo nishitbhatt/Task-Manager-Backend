@@ -58,6 +58,6 @@ app.use(bodyParser.json());
 // User Routes
 app.use('/api/user', cors(corsOptions), UserRoutes);
 // Task Routes
-app.use('/api/user-task', auth, UserTasksRoutes);
+app.use('/api/user-task', auth, cors(corsOptions), UserTasksRoutes);
 
 export default app
