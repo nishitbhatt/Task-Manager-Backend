@@ -36,6 +36,7 @@ const corsOptions = {
             callback(new Error('Origin not allowed by CORS'));
         }
     },
+    credentials: true
 };
 app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
