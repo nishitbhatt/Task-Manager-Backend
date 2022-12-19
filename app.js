@@ -3,8 +3,6 @@ import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from "cors";
-import swaggerUi from 'swagger-ui-express'
-import swaggerJson from './swagger-output.json' assert { type: "json" };
 dotenv.config()
 import db_connect from './config/database.js'
 import auth from './middleware/auth.js'
@@ -59,9 +57,5 @@ app.use(handleError);
 
 
 
-
-
-// API Docs Route
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerJson))
 
 export default app
