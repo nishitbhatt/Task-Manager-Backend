@@ -1,4 +1,8 @@
-export { default as ListsModel } from './Task-Lists.model.js'
-export { default as SectionModel } from './Task-Sections.model.js'
-export { default as TasksModel } from './Tasks.model.js'
-export { default as UserModel } from './Users.model.js'
+// User- Tasks
+export { default as TagsModel } from './Tags.js'
+export { default as ListModel } from './List.js'
+export { default as SectionModel } from './Section.js'
+export { default as TaskModel } from './Task.js'
+
+// User- Account
+export { default as UserModel } from './Users.js'

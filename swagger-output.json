@@ -1,0 +1,451 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "",
+      "description": ""
+    }
+  ],
+  "schemes": [],
+  "securityDefinitions": {},
+  "paths": {
+    "*": {
+      "options": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/user/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "example": "any"
+                },
+                "last_name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "contact_no": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/user-task/mark-task-complete/{taskid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "taskid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/mark-task-uncomplete/{taskid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "taskid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/get-all-tasks": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/user-task/get-task/{taskid}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "taskid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/create-task": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "duedate": {
+                  "example": "any"
+                },
+                "completed": {
+                  "example": "any"
+                },
+                "sectionid": {
+                  "example": "any"
+                },
+                "priority": {
+                  "example": "any"
+                },
+                "listid": {
+                  "example": "any"
+                },
+                "parentid": {
+                  "example": "any"
+                },
+                "tagsids": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/edit-task/{taskid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "taskid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "duedate": {
+                  "example": "any"
+                },
+                "completed": {
+                  "example": "any"
+                },
+                "sectionid": {
+                  "example": "any"
+                },
+                "priority": {
+                  "example": "any"
+                },
+                "listid": {
+                  "example": "any"
+                },
+                "parentid": {
+                  "example": "any"
+                },
+                "tagsids": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/delete-task/{taskid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "taskid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/get-all-sections": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/user-task/create-section": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/delete-section/{sectionid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "sectionid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/edit-section/{sectionid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "sectionid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/get-all-lists": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/user-task/create-list": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/delete-list/{listid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "listid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/edit-list/{listid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "listid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/get-all-tags": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/user-task/create-tag": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/delete-tag/{tagid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "tagid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/api/user-task/edit-tag/{tagid}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "tagid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    }
+  }
+}

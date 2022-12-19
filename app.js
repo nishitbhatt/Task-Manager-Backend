@@ -3,25 +3,27 @@ import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from "cors";
-
+import swaggerUi from 'swagger-ui-express'
+import swaggerJson from './swagger-output.json' assert { type: "json" };
 dotenv.config()
 import db_connect from './config/database.js'
 import auth from './middleware/auth.js'
+import handleError from './middleware/errorHandler.js';
 db_connect()
-
-
-
-
 // Import Routes
-import { default as UserRoutes } from './routes/users.js';
-import { default as UserTasksRoutes } from './routes/user-tasks.js';
+import { default as userRoutes } from './routes/users.js';
+import { default as userTasksRoutes } from './routes/user-task.js';
+
+
 
 const app = express();
 
+// Cors Whitelist
 const allowedOrigins = [
     'capacitor://localhost',
     'ionic://localhost',
     'http://localhost',
+    'http://192.168.1.78:4001',
     'http://localhost:3000',
     'http://localhost:8080',
     'http://localhost:8100',
@@ -46,18 +48,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-// app.use(function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
-//     res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-//     res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS, DELETE');
-//     res.setHeader('Access-Control-Allow-Credentials', 'true');
-//     console.log('HEREEEE')
-//     next();
-// });
-
 // User Routes
-app.use('/api/user', cors(corsOptions), UserRoutes);
+app.use('/api/user', userRoutes);
 // Task Routes
-app.use('/api/user-task', auth, cors(corsOptions), UserTasksRoutes);
+app.use('/api/user-task', auth, userTasksRoutes);
+
+
+// Catch-ALL Error Middleware
+app.use(handleError);
+
+
+
+
+
+// API Docs Route
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerJson))
 
 export default app

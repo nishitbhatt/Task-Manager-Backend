@@ -19,10 +19,22 @@ content-type: application/json
     "first_name": "Nishit",
     "last_name": "Bhatt",
     "email": "nishit@gmail.com",
-    "password": "Nishit@gmail@123",
+    "password": "nishit@123",
     "contact_no": "9429214933"
 }
 
+
+###
+
+POST https://zentodo-app-backend.vercel.app/api/user/register
+content-type: application/json
+
+{
+    "first_name": "Nishit",
+    "last_name": "Bhatt",
+    "email": "nishit@gmail.com",
+    "password": "nishit@123"
+}
 
 
 ###
@@ -44,8 +56,6 @@ content-type: application/json
 ###
 
 
-
-# POST http://192.168.1.78:4001/api/user/login
 POST https://zentodo-app-backend.vercel.app/api/user/login
 content-type: application/json
 
@@ -64,3 +74,20 @@ content-type: application/json
     "email": "nishit@gmail.com",
     "password": "Nishit@gmail@123"
 }
+
+
+####
+
+POST http://192.168.1.78:4001/api/user-task/create-section
+content-type: application/json
+
+{
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM5OThmMzk2MDg2Y2U4YzQ3YjQxMjUyIiwiZW1haWwiOiJuaXNoaXRAZ21haWwuY29tIiwiaWF0IjoxNjcxMDEwNTcwLCJleHAiOjE2NzEwMTc3NzB9.9e2YQYW6YF6-9G4FlYF9qCR3zib9pGBEZJzw6LjuNdE"
+}
+
+
+
+
+####
+#   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM5OThmMzk2MDg2Y2U4YzQ3YjQxMjUyIiwiZW1haWwiOiJuaXNoaXRAZ21haWwuY29tIiwiaWF0IjoxNjcxMDEwNTcwLCJleHAiOjE2NzEwMTc3NzB9.9e2YQYW6YF6-9G4FlYF9qCR3zib9pGBEZJzw6LjuNdE"
+#   "title": "This is tittle",
