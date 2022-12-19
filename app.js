@@ -47,9 +47,9 @@ app.use(bodyParser.json());
 
 
 // User Routes
-app.use('/api/user', userRoutes);
+app.use('/api/user', cors(corsOptions), userRoutes);
 // Task Routes
-app.use('/api/user-task', auth, userTasksRoutes);
+app.use('/api/user-task', [auth, cors(corsOptions)], userTasksRoutes);
 
 
 // Catch-ALL Error Middleware
