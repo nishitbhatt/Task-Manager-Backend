@@ -33,7 +33,8 @@ content-type: application/json
     "first_name": "Nishit",
     "last_name": "Bhatt",
     "email": "nishit@gmail.com",
-    "password": "nishit@123"
+    "password": "nishit@123",
+    "contact_no": "9429214933"
 }
 
 

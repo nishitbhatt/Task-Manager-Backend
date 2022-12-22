@@ -21,10 +21,10 @@ export const getInitialUserTasks = async (req, res) => {
     const userid = req.user.user_id
 
     try {
-        const filter = { userid, list: null }
-        const tasks = await TaskModel.find(filter);
+        const filter = { userid, list: { $exists: false } }
         const sections = await SectionModel.find(filter);
-        const tags = await TagsModel.find(filter);
+        const tasks = await TaskModel.find(filter).populate({ path: 'section', select: 'name' }).populate({ path: 'tags', select: 'name' });;
+        const tags = await TagsModel.find({ userid });
 
         status = 200;
         data = { tasks, sections, tags };

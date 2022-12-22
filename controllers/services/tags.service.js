@@ -38,12 +38,14 @@ export const removeTagsById = async (req, res) => {
         if (tagid) {
 
             const queryRecord = await TagsModel.findOneAndRemove({ '_id': tagid, userid })
-            // const taskQueryRecord = await TaskModel.update({
-            //     userid, tags:
-            //         { "$elemMatch": { "_id": tagid } }
-            // }, {
-            //     $pull: { 'tags': { '_id': new ObjectId(tagid) } }
-            // })
+
+            const taskQueryRecord = await TaskModel.update({
+                userid, tags:
+                    { "$elemMatch": { "_id": tagid } }
+            }, {
+                $pullAll: { tags: [tagid] }
+            })            
+
             if (queryRecord) {
                 status = 200;
                 data = queryRecord;
@@ -52,6 +54,7 @@ export const removeTagsById = async (req, res) => {
     } catch (error) {
         status = 500;
         data = { error };
+        console.log({error});
     }
     return res.status(status).json({ status, data });
 }

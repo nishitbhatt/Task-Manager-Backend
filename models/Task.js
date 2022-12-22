@@ -16,11 +16,11 @@ const TasksSchema = new mongoose.Schema({
         ref: 'list',
     },
     parentid: { type: Types.ObjectId },
-    tags: [TagsSchema],
-    // tags: [{
-    //     type: Types.ObjectId,
-    //     ref: 'tags',
-    // }],
+    // tags: [TagsSchema],
+    tags: [{
+        type: Types.ObjectId,
+        ref: 'tags',
+    }],
     userid: { type: Types.ObjectId, require: true },
 }, {
     timestamps: true, versionKey: false,

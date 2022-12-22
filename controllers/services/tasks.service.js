@@ -1,18 +1,22 @@
-import { Model } from "mongoose";
-import { SectionModel, TaskModel } from "../../models/index.js"
+import { TaskModel } from "../../models/index.js"
 
 export const markTaskCompleteById = async (req, res) => {
     const userid = req.user.user_id
     let status = 404, message = 'Task not found!', data = { message }, completed = true;
-    const { taskid } = req.params
+    const { taskid: _id } = req.params
 
     try {
 
-        if (taskid) {
-            const queryRecord = await TaskModel.updateOne({ '_id': taskid, userid }, { completed })
+        if (_id) {
+            const queryRecord = await TaskModel.updateOne({ _id, userid }, { completed })
+
+            const newSavedTask = await TaskModel.findOne({ userid, '_id': _id }).populate({ path: 'section', select: 'name' })
+                .populate({ path: 'tags', select: 'name' })
+                .populate({ path: 'list', select: 'name' })
+
             if (queryRecord) {
                 status = 200;
-                data = queryRecord;
+                data = newSavedTask;
             }
         }
     } catch (error) {
@@ -25,14 +29,19 @@ export const markTaskCompleteById = async (req, res) => {
 export const markTaskUncompleteById = async (req, res) => {
     const userid = req.user.user_id
     let status = 404, message = 'Task not found!', data = { message }, completed = false;
-    const { taskid } = req.params
+    const { taskid: _id } = req.params
     try {
 
-        if (taskid) {
-            const queryRecord = await TaskModel.updateOne({ '_id': taskid, userid }, { completed })
+        if (_id) {
+            const queryRecord = await TaskModel.updateOne({ _id, userid }, { completed })
+
+            const newSavedTask = await TaskModel.findOne({ userid, '_id': _id }).populate({ path: 'section', select: 'name' })
+                .populate({ path: 'tags', select: 'name' })
+                .populate({ path: 'list', select: 'name' })
+
             if (queryRecord) {
                 status = 200;
-                data = queryRecord;
+                data = newSavedTask;
             }
         }
     } catch (error) {
@@ -48,7 +57,7 @@ export const getAllTaskList = async (req, res) => {
 
     try {
 
-        const queryRecord = await TaskModel.find({ userid })
+        const queryRecord = await TaskModel.find({ userid }).populate({ path: 'tags', select: 'name' }).populate({ path: 'section', select: 'name' }).populate({ path: 'list', select: 'name' })
         if (queryRecord) {
             status = 200;
             data = queryRecord;
@@ -63,34 +72,38 @@ export const getAllTaskList = async (req, res) => {
 export const createNewTask = async (req, res) => {
     let status = 404, message = 'Title field is required!', data = { message };
     const userid = req.user.user_id
-    const { title, description, duedate, completed, sectionid, priority, listid, parentid, tags } = req.body
+    const { title, description, duedate, completed, section, priority, listid, parentid, tags } = req.body
 
     try {
 
         if (title) {
 
-            const queryRecord = await new TaskModel({
+            const newTask = await TaskModel.create({
                 title,
                 description,
                 duedate,
                 completed,
                 priority,
-                section: sectionid,
-                tags,
+                section,
                 listid,
                 parentid,
                 userid
-            }).save()
-
-            if (queryRecord) {
+            })
+            if (tags.length) {
+                newTask.tags = tags
+            }
+            const savedTask = await newTask.save()
+            const newSavedTask = await TaskModel.findOne({ userid, '_id': savedTask._id }).populate({ path: 'section', select: 'name' })
+                .populate({ path: 'tags', select: 'name' })
+                .populate({ path: 'list', select: 'name' })
+            if (newTask) {
                 status = 200;
-                data = queryRecord;
+                data = newSavedTask;
             }
         }
     } catch (error) {
         status = 500;
         data = { error };
-        console.log({ error })
     }
     return res.status(status).json({ status, data });
 }
@@ -99,20 +112,27 @@ export const editTaskById = async (req, res) => {
     let status = 404, message = 'Title and task id are required!', data = { message };
     const { taskid } = req.params
     const userid = req.user.user_id
-    const { title, description, duedate, completed, section: sectionId, priority, listid, parentid, tags } = req.body
-
+    const { title, description, duedate, completed, section: sectionId, priority, parentid, tags } = req.body
     try {
 
         if (taskid && title) {
-            // const queryRecord = await TaskModel
-            //     .findOneAndUpdate({ userid, '_id': taskid }, { title, description, duedate, completed, section, priority, listid, parentid, tagsids })
 
             const queryRecord = await TaskModel
-                .findOneAndUpdate({ userid, '_id': taskid }, { title, description, duedate, completed, section: sectionId, priority, listid, parentid, tags })
+                .updateOne({ userid, '_id': taskid }, { title, description, duedate, completed, section: sectionId, tags, priority, parentid })
+
+            if (tags.length) {
+                queryRecord.tags = tags
+            } else {
+                delete queryRecord.tags
+            }
+
+            const editedTask = await TaskModel.findOne({ userid, '_id': taskid }).populate({ path: 'section', select: 'name' })
+                .populate({ path: 'tags', select: 'name' })
+                .populate({ path: 'list', select: 'name' })
 
             if (queryRecord) {
                 status = 200;
-                data = queryRecord;
+                data = editedTask;
             }
         }
     } catch (error) {
@@ -146,14 +166,15 @@ export const removeTaskById = async (req, res) => {
 export const getTaskById = async (req, res) => {
     let status = 404, message = 'Task id is required!', data = { message };
     const userid = req.user.user_id
-    const { taskid } = req.params
+    const { taskid: _id } = req.params
 
     try {
-
-        const queryRecord = await TaskModel.findById({ taskid, userid })
-        if (queryRecord) {
-            status = 200;
-            data = queryRecord;
+        if (_id) {
+            const queryRecord = await TaskModel.findById({ _id, userid })
+            if (queryRecord) {
+                status = 200;
+                data = queryRecord;
+            }
         }
     } catch (error) {
         status = 500;

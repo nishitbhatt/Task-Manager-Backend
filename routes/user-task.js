@@ -35,5 +35,5 @@ routes.post('/delete-tag/:tagid', removeTagsById)
 routes.post('/edit-tag/:tagid', editTagsById)
 
 // User TAsk META
-routes.get('/get-initial-bundle', getInitialUserTasks)
+routes.get('/get-initial-task-bundle', getInitialUserTasks)
 export default routes
