@@ -54,7 +54,6 @@ export const removeTagsById = async (req, res) => {
     } catch (error) {
         status = 500;
         data = { error };
-        console.log({error});
     }
     return res.status(status).json({ status, data });
 }

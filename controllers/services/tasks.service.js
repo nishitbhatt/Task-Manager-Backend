@@ -72,7 +72,7 @@ export const getAllTaskList = async (req, res) => {
 export const createNewTask = async (req, res) => {
     let status = 404, message = 'Title field is required!', data = { message };
     const userid = req.user.user_id
-    const { title, description, duedate, completed, section, priority, listid, parentid, tags } = req.body
+    const { title, description, duedate, completed, section, priority, list, parentid, tags } = req.body
 
     try {
 
@@ -85,7 +85,7 @@ export const createNewTask = async (req, res) => {
                 completed,
                 priority,
                 section,
-                listid,
+                list,
                 parentid,
                 userid
             })

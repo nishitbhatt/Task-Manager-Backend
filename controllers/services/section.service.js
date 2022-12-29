@@ -13,16 +13,23 @@ export const getAllSectionList = async (req, res) => {
 }
 
 export const createSection = async (req, res) => {
-    let status = 404, data = [];
+    let status = 404, message = 'Name and list are required!', data = { message };
     const userid = req.user.user_id
-    const { name } = req.body
+    const { name, list } = req.body
 
-    if (name) {
-        const queryRecord = await new SectionModel({ name, userid }).save();
-        if (queryRecord) {
-            data = queryRecord;
-            status = 200;
+    try {
+        if (name) {
+            const queryRecord = await new SectionModel({ name, list, userid }).save();
+
+            if (queryRecord) {
+                data = queryRecord;
+                status = 200;
+            }
         }
+        
+    } catch (error) {
+        status = 500;
+        data = { error };
     }
     return res.status(status).json({ status, data });
 }

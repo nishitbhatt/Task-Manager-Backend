@@ -1,3 +1,4 @@
+import ListModel from '../models/List.js';
 import SectionModel from '../models/Section.js';
 import TagsModel from '../models/Tags.js';
 import TaskModel from '../models/Task.js';
@@ -21,13 +22,14 @@ export const getInitialUserTasks = async (req, res) => {
     const userid = req.user.user_id
 
     try {
-        const filter = { userid, list: { $exists: false } }
+        const filter = { userid }
         const sections = await SectionModel.find(filter);
-        const tasks = await TaskModel.find(filter).populate({ path: 'section', select: 'name' }).populate({ path: 'tags', select: 'name' });;
+        const tasks = await TaskModel.find(filter).populate({ path: 'section', select: 'name' }).populate({ path: 'tags', select: 'name' }).populate({ path: 'list', select: 'name' });;
         const tags = await TagsModel.find({ userid });
+        const lists = await ListModel.find({ userid });
 
         status = 200;
-        data = { tasks, sections, tags };
+        data = { tasks, sections, tags, lists };
     } catch (error) {
         status = 500;
         data = { error };
